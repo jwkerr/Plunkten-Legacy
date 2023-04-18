@@ -117,9 +117,9 @@ class Embeds():
 
         return embed
     
-    def error_embed(value):
+    def error_embed(value, footer = None):
         traceback.print_exc()
-        embed = Embeds.embed_builder(title = "`Error`")
+        embed = Embeds.embed_builder(title = "`Error`", footer = footer)
 
         embed.add_field(name = "Something went wrong", value = value, inline = True)
 

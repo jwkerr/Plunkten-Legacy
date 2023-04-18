@@ -20,6 +20,7 @@ class ResCommand(commands.Cog):
         username: str = commands.Param(description = "Resident's username"),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
+        commandString = f"/res search username: {username} server: {server}"
         try:
             residentsLookup = Utils.Lookup.lookup(server, endpoint = "residents", name = username)
 
@@ -48,7 +49,7 @@ class ResCommand(commands.Cog):
 
             rnaoPermsList = Utils.CommandTools.rnao_perms(json = residentsLookup)
 
-            embed = Utils.Embeds.embed_builder(title = f"`{fullName}`", author = inter.author, footer = f"/res search username: {username} server: {server}", thumbnail = f"https://mc-heads.net/head/{residentsLookup['strings']['username']}")
+            embed = Utils.Embeds.embed_builder(title = f"`{fullName}`", author = inter.author, footer = commandString, thumbnail = f"https://mc-heads.net/head/{residentsLookup['strings']['username']}")
 
             embed.add_field(name = "Affiliation", value = f"• `Town` — {town}\n• `Nation` — {nation}", inline = True)
             embed.add_field(name = "Online", value = residentsLookup["status"]["isOnline"], inline = True)
@@ -75,7 +76,7 @@ class ResCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote their username incorrectly or if the server is currently offline, otherwise try again later")
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote their username incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -86,10 +87,11 @@ class ResCommand(commands.Cog):
         username: str = commands.Param(description = "Resident's username"),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
+        commandString = f"/res friendlist username: {username} server: {server}"
         try:
             residentsLookup = Utils.Lookup.lookup(server.lower(), endpoint = "residents", name = username)
 
-            embed = Utils.Embeds.embed_builder(title = f"`{residentsLookup['strings']['username']}'s Friends`", footer = f"/res friendlist username: {username} server: {server}", author = inter.author)
+            embed = Utils.Embeds.embed_builder(title = f"`{residentsLookup['strings']['username']}'s Friends`", footer = commandString, author = inter.author)
 
             if len(residentsLookup["friends"]) != 0:
                 friendsString = Utils.CommandTools.list_to_string(list = residentsLookup["friends"])
@@ -102,7 +104,7 @@ class ResCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote their username incorrectly or if the server is currently offline, otherwise try again later")
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote their username incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 

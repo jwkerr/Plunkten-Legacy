@@ -20,6 +20,7 @@ class TownCommand(commands.Cog):
         town: str = commands.Param(description = "Town's name"),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
+        commandString = f"/town search town: {town} server: {server}"
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
 
@@ -27,7 +28,7 @@ class TownCommand(commands.Cog):
 
             rnaoPermsList = Utils.CommandTools.rnao_perms(json = townsLookup)
 
-            embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}`", description = townsLookup["strings"]["board"], footer = f"/town search town: {town} server: {server}", author = inter.author)
+            embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}`", description = townsLookup["strings"]["board"], footer = commandString, author = inter.author)
 
             embed.add_field(name = "Mayor", value = townsLookup["strings"]["mayor"], inline = True)
             embed.add_field(name = "Nation", value = townsLookup["affiliation"]["nation"], inline = True)
@@ -47,7 +48,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the town name incorrectly or if the server is currently offline, otherwise try again later")
+            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -58,10 +59,11 @@ class TownCommand(commands.Cog):
         town: str = commands.Param(description = "Town's name"),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
+        commandString = f"/town reslist town: {town} server: {server}"
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
 
-            embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}'s Residents`", footer = f"/town reslist town: {town} server: {server}", author = inter.author)
+            embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}'s Residents`", footer = commandString, author = inter.author)
 
             residentsString = Utils.CommandTools.list_to_string(list = townsLookup["residents"])
 
@@ -70,7 +72,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the town name incorrectly or if the server is currently offline, otherwise try again later")
+            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -81,10 +83,11 @@ class TownCommand(commands.Cog):
         town: str = commands.Param(description = "Town's name"),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
+        commandString = f"/town ranklist town: {town} server: {server}"
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
 
-            embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}'s Ranked Residents`", footer = f"/town ranklist town: {town} server: {server}", author = inter.author)
+            embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}'s Ranked Residents`", footer = commandString, author = inter.author)
 
             for rank in townsLookup["ranks"]:
                 if len(townsLookup["ranks"][rank]) != 0:
@@ -100,7 +103,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the towm name incorrectly or if the server is currently offline, otherwise try again later")
+            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the towm name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -111,10 +114,11 @@ class TownCommand(commands.Cog):
         town: str = commands.Param(description = "Town's name"),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
+        commandString = f"/town outlawlist town: {town} server: {server}"
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
 
-            embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}'s Outlaws`", footer = f"/town outlawlist town: {town} server: {server}", author = inter.author)
+            embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}'s Outlaws`", footer = commandString, author = inter.author)
 
             if len(townsLookup["outlaws"]) != 0:
                 outlawsString = Utils.CommandTools.list_to_string(list = townsLookup["outlaws"])
@@ -127,7 +131,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the town name incorrectly or if the server is currently offline, otherwise try again later")
+            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 

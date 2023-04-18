@@ -12,6 +12,7 @@ class ServerCommand(commands.Cog):
         inter: disnake.ApplicationCommandInteraction,
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
+        commandString = f"/server server: {server}"
         try:
             serverLookup = Utils.Lookup.lookup(server)
             allResidentsLookup = Utils.Lookup.lookup(server, endpoint = "residents")
@@ -20,7 +21,7 @@ class ServerCommand(commands.Cog):
 
             weather = Utils.CommandTools.get_weather(serverLookup)
 
-            embed = Utils.Embeds.embed_builder(title = f"`{server.capitalize()}`", footer = f"/server server: {server}", author = inter.author)
+            embed = Utils.Embeds.embed_builder(title = f"`{server.capitalize()}`", footer = commandString, author = inter.author)
 
             embed.add_field(name = "Online Players", value = f"{serverLookup['players']['numOnlinePlayers']}/{serverLookup['players']['maxPlayers']}", inline = False)
 
@@ -33,7 +34,7 @@ class ServerCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if the server is currently offline, otherwise try again later")
+            embed = Utils.Embeds.error_embed(value = "Check if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
