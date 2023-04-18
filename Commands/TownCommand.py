@@ -48,7 +48,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -72,7 +72,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -103,7 +103,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the towm name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote the towm name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -131,7 +131,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if the you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
