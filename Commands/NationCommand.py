@@ -23,7 +23,13 @@ class NationCommand(commands.Cog):
         commandString = f"/nation search nation: {nation} server: {server}"
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             locationUrl = f"https://earthmc.net/map/{server}/?zoom=4&x={nationsLookup['spawn']['x']}&z={nationsLookup['spawn']['z']}"
 
             embed = Utils.Embeds.embed_builder(title = f"`{nationsLookup['strings']['nation']}`", description = nationsLookup["strings"]["board"], footer = commandString, author = inter.author)
@@ -43,7 +49,7 @@ class NationCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the nation name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -57,7 +63,13 @@ class NationCommand(commands.Cog):
         commandString = f"/nation reslist nation: {nation} server: {server}"
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             embed = Utils.Embeds.embed_builder(title = f"`{nationsLookup['strings']['nation']}'s Residents`", footer = commandString, author = inter.author)
 
             residentsString = Utils.CommandTools.list_to_string(list = nationsLookup["residents"])
@@ -67,7 +79,7 @@ class NationCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the nation name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -81,7 +93,13 @@ class NationCommand(commands.Cog):
         commandString = f"/nation ranklist nation: {nation} server: {server}"
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             embed = Utils.Embeds.embed_builder(title = f"`{nationsLookup['strings']['nation']}'s Ranked Residents`", footer = commandString, author = inter.author)
 
             for rank in nationsLookup["ranks"]:
@@ -96,7 +114,7 @@ class NationCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the nation name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -110,7 +128,13 @@ class NationCommand(commands.Cog):
         commandString = f"/nation allylist nation: {nation} server: {server}"
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             embed = Utils.Embeds.embed_builder(title = f"`{nationsLookup['strings']['nation']}'s Allies`", footer = commandString, author = inter.author)
 
             if len(nationsLookup["allies"]) != 0:
@@ -124,7 +148,7 @@ class NationCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the nation name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -138,7 +162,13 @@ class NationCommand(commands.Cog):
         commandString = f"/nation enemylist nation: {nation} server: {server}"
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             embed = Utils.Embeds.embed_builder(title = f"`{nationsLookup['strings']['nation']}'s Enemies`", footer = commandString, author = inter.author)
 
             if len(nationsLookup["enemies"]) != 0:
@@ -152,7 +182,7 @@ class NationCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the nation name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -166,7 +196,13 @@ class NationCommand(commands.Cog):
         commandString = f"/nation townlist nation: {nation} server: {server}"
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             embed = Utils.Embeds.embed_builder(title = f"`{nationsLookup['strings']['nation']}'s Towns`", footer = commandString, author = inter.author)
 
             townsString = Utils.CommandTools.list_to_string(list = nationsLookup["towns"])
@@ -176,7 +212,7 @@ class NationCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the nation name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -191,7 +227,13 @@ class NationCommand(commands.Cog):
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
             allNationsLookup = Utils.Lookup.lookup(server, endpoint = "nations")
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             embed = Utils.Embeds.embed_builder(title = f"`{nationsLookup['strings']['nation']}'s Unallied Nations`", footer = commandString, author = inter.author)
 
             allyList = nationsLookup["allies"]
@@ -199,7 +241,7 @@ class NationCommand(commands.Cog):
             allNations.remove(nationsLookup["strings"]["nation"])
 
             unalliedList = list(set(allNations).difference(set(allyList)))
-            if unalliedList != len(0):
+            if len(unalliedList) != 0:
                 unalliedString = Utils.CommandTools.list_to_string(list = unalliedList)
 
                 embed.add_field(name = "Unallied", value = unalliedString, inline = True)
@@ -210,7 +252,7 @@ class NationCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the nation name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 

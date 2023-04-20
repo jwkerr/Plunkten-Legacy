@@ -23,7 +23,13 @@ class TownCommand(commands.Cog):
         commandString = f"/town search town: {town} server: {server}"
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             locationUrl = f"https://earthmc.net/map/{server}/?zoom=4&x={townsLookup['spawn']['x']}&z={townsLookup['spawn']['z']}"
 
             try:
@@ -56,7 +62,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -70,7 +76,13 @@ class TownCommand(commands.Cog):
         commandString = f"/town reslist town: {town} server: {server}"
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}'s Residents`", footer = commandString, author = inter.author)
 
             residentsString = Utils.CommandTools.list_to_string(list = townsLookup["residents"])
@@ -80,7 +92,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -94,7 +106,13 @@ class TownCommand(commands.Cog):
         commandString = f"/town ranklist town: {town} server: {server}"
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}'s Ranked Residents`", footer = commandString, author = inter.author)
 
             for rank in townsLookup["ranks"]:
@@ -117,7 +135,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the towm name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -131,7 +149,13 @@ class TownCommand(commands.Cog):
         commandString = f"/town outlawlist town: {town} server: {server}"
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}'s Outlaws`", footer = commandString, author = inter.author)
 
             if len(townsLookup["outlaws"]) != 0:
@@ -145,7 +169,7 @@ class TownCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote the town name incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 

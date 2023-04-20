@@ -18,7 +18,13 @@ class ServerCommand(commands.Cog):
             allResidentsLookup = Utils.Lookup.lookup(server, endpoint = "residents")
             allTownsLookup = Utils.Lookup.lookup(server, endpoint = "towns")
             allNationsLookup = Utils.Lookup.lookup(server, endpoint = "nations")
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+
+        try:
             weather = Utils.CommandTools.get_weather(serverLookup)
 
             embed = Utils.Embeds.embed_builder(title = f"`{server.capitalize()}`", footer = commandString, author = inter.author)
@@ -34,7 +40,7 @@ class ServerCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
