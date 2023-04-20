@@ -14,12 +14,6 @@ class CommandTools():
 
         return weather
 
-    def unix_to_date(timestamp):
-        date = datetime.datetime.fromtimestamp(timestamp / 1000)
-        dateString = date.strftime('%Y-%m-%d')
-
-        return dateString
-
     def rnao_perms(json):
         rnaoPermsList = []
         permsKeyList = ["buildPerms", "destroyPerms", "switchPerms", "itemUsePerms"]
@@ -117,8 +111,9 @@ class Embeds():
 
         return embed
     
-    def error_embed(value, footer = None):
-        traceback.print_exc()
+    def error_embed(value, type = None, footer = None):
+        if type != "userError":
+            traceback.print_exc()
         embed = Embeds.embed_builder(title = "`Error`", footer = footer)
 
         embed.add_field(name = "Something went wrong", value = value, inline = True)

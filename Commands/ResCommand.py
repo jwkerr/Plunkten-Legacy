@@ -23,8 +23,13 @@ class ResCommand(commands.Cog):
         commandString = f"/res search username: {username} server: {server}"
         try:
             residentsLookup = Utils.Lookup.lookup(server, endpoint = "residents", name = username)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
-            #Based off all the entries in the name key create the player's full name and add it to a single string, strip last character
+            await inter.send(embed = embed, ephemeral = True)
+            return
+
+        try:
             fullNameList = [residentsLookup["strings"]["title"], residentsLookup["strings"]["username"], residentsLookup["strings"]["surname"]]
 
             fullName = ""
@@ -34,10 +39,9 @@ class ResCommand(commands.Cog):
                 else:
                     fullName += fullNameList[i] + " "
 
-            #Creating town and nation variable if they have one, otherwise it is set to None
             try:
                 town = residentsLookup["affiliation"]["town"]
-                joinedTownAt = Utils.CommandTools.unix_to_date(residentsLookup['timestamps']['joinedTownAt'])
+                joinedTownAt = f"<t:{round(residentsLookup['timestamps']['joinedTownAt'] / 1000)}:R>"
                 try:
                     nation = residentsLookup["affiliation"]["nation"]
                 except:
@@ -55,9 +59,9 @@ class ResCommand(commands.Cog):
             embed.add_field(name = "Online", value = residentsLookup["status"]["isOnline"], inline = True)
             embed.add_field(name = "Balance", value = residentsLookup["stats"]["balance"], inline = True)
 
-            embed.add_field(name = "Registered", value = Utils.CommandTools.unix_to_date(residentsLookup["timestamps"]["registered"]), inline = True)
-            embed.add_field(name = "Last Online", value = Utils.CommandTools.unix_to_date(residentsLookup["timestamps"]["lastOnline"]), inline = True)
-            embed.add_field(name = "Joined town", value = joinedTownAt, inline = True)
+            embed.add_field(name = "Registered", value = f"<t:{round(residentsLookup['timestamps']['registered'] / 1000)}:R>", inline = True)
+            embed.add_field(name = "Last Online", value = f"<t:{round(residentsLookup['timestamps']['lastOnline'] / 1000)}:R>", inline = True)
+            embed.add_field(name = "Joined Town", value = joinedTownAt, inline = True)
 
             embed.add_field(name = "Perms", value = f"• `Build` — {rnaoPermsList[0]}\n• `Destroy` — {rnaoPermsList[1]}\n• `Switch` — {rnaoPermsList[2]}\n• `ItemUse` — {rnaoPermsList[3]}", inline = True)
             embed.add_field(name = "Flags", value = f"• `PvP` — {residentsLookup['perms']['flagPerms']['pvp']}\n• `Explosions` — {residentsLookup['perms']['flagPerms']['explosion']}\n• `Firespread` — {residentsLookup['perms']['flagPerms']['fire']}\n• `Mob Spawns` — {residentsLookup['perms']['flagPerms']['mobs']}", inline = True)
@@ -76,7 +80,7 @@ class ResCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote their username incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 
@@ -90,7 +94,13 @@ class ResCommand(commands.Cog):
         commandString = f"/res friendlist username: {username} server: {server}"
         try:
             residentsLookup = Utils.Lookup.lookup(server.lower(), endpoint = "residents", name = username)
+        except:
+            embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
+            await inter.send(embed = embed, ephemeral = True)
+            return
+        
+        try:
             embed = Utils.Embeds.embed_builder(title = f"`{residentsLookup['strings']['username']}'s Friends`", footer = commandString, author = inter.author)
 
             if len(residentsLookup["friends"]) != 0:
@@ -104,7 +114,7 @@ class ResCommand(commands.Cog):
             await inter.send(embed = embed, ephemeral = False)
 
         except:
-            embed = Utils.Embeds.error_embed(value = "Check if you wrote their username incorrectly or if the server is currently offline, otherwise try again later", footer = commandString)
+            embed = Utils.Embeds.error_embed(value = "If it is not evident that the error was your fault, please report it", footer = commandString)
 
             await inter.send(embed = embed, ephemeral = True)
 

@@ -26,12 +26,19 @@ class TownCommand(commands.Cog):
 
             locationUrl = f"https://earthmc.net/map/{server}/?zoom=4&x={townsLookup['spawn']['x']}&z={townsLookup['spawn']['z']}"
 
+            try:
+                nation = townsLookup["affiliation"]["nation"]
+                joinedNationAt = f"<t:{round(townsLookup['timestamps']['joinedNationAt'] / 1000)}:R>"
+            except:
+                nation = None
+                joinedNationAt = "N/A"
+
             rnaoPermsList = Utils.CommandTools.rnao_perms(json = townsLookup)
 
             embed = Utils.Embeds.embed_builder(title = f"`{townsLookup['strings']['town']}`", description = townsLookup["strings"]["board"], footer = commandString, author = inter.author)
 
             embed.add_field(name = "Mayor", value = townsLookup["strings"]["mayor"], inline = True)
-            embed.add_field(name = "Nation", value = townsLookup["affiliation"]["nation"], inline = True)
+            embed.add_field(name = "Nation", value = nation, inline = True)
             embed.add_field(name = "Location", value = f"[Open Dynmap]({locationUrl})", inline = True)
 
             embed.add_field(name = "Residents", value = townsLookup["stats"]["numResidents"], inline = True)
@@ -39,11 +46,12 @@ class TownCommand(commands.Cog):
             embed.add_field(name = "Balance", value = townsLookup["stats"]["balance"], inline = True)
 
             embed.add_field(name = "Founder", value = townsLookup["strings"]["founder"], inline = True)
-            embed.add_field(name = "Founded", value = Utils.CommandTools.unix_to_date(townsLookup["timestamps"]["registered"]), inline = True)            
-            embed.add_field(name = "Joined Nation", value = Utils.CommandTools.unix_to_date(townsLookup["timestamps"]["joinedNationAt"]), inline = True)
+            embed.add_field(name = "Founded", value = f"<t:{round(townsLookup['timestamps']['registered'] / 1000)}:R>", inline = True)            
+            embed.add_field(name = "Joined Nation", value = joinedNationAt, inline = True)
             
             embed.add_field(name = "Perms", value = f"• `Build` — {rnaoPermsList[0]}\n• `Destroy` — {rnaoPermsList[1]}\n• `Switch` — {rnaoPermsList[2]}\n• `ItemUse` — {rnaoPermsList[3]}", inline = True)
-            embed.add_field(name = "Status", value = f"• `Open` — {townsLookup['status']['isOpen']}\n• `Public` — {townsLookup['status']['isPublic']}\n• `Neutral` — {townsLookup['status']['isNeutral']}\n• `Capital` — {townsLookup['status']['isCapital']}\n• `Overclaimed` — {townsLookup['status']['isOverClaimed']}\n• `Ruined` — {townsLookup['status']['isRuined']}", inline = True)
+            embed.add_field(name = "Flags", value = f"• `PvP` — {townsLookup['perms']['flagPerms']['pvp']}\n• `Explosions` — {townsLookup['perms']['flagPerms']['explosion']}\n• `Firespread` — {townsLookup['perms']['flagPerms']['fire']}\n• `Mob Spawns` — {townsLookup['perms']['flagPerms']['mobs']}", inline = True)
+            embed.add_field(name = "Status", value = f"• `Capital` — {townsLookup['status']['isCapital']}\n• `Open` — {townsLookup['status']['isOpen']}\n• `Public` — {townsLookup['status']['isPublic']}\n• `Neutral` — {townsLookup['status']['isNeutral']}\n• `Overclaimed` — {townsLookup['status']['isOverClaimed']}\n• `Ruined` — {townsLookup['status']['isRuined']}", inline = True)
             
             await inter.send(embed = embed, ephemeral = False)
 
@@ -95,10 +103,16 @@ class TownCommand(commands.Cog):
 
                     embed.add_field(name = rank.capitalize(), value = rankString, inline = True)
 
+                else:
+                    embed.add_field(name = rank.capitalize(), value = "N/A", inline = True)
+
             if len(townsLookup["trusted"]) != 0:
                 trustedString = Utils.CommandTools.list_to_string(list = townsLookup["trusted"])
 
                 embed.add_field(name = "Trusted", value = trustedString, inline = True)
+
+            else:
+                embed.add_field(name = "Trusted", value = "N/A", inline = True)
 
             await inter.send(embed = embed, ephemeral = False)
 
