@@ -87,7 +87,7 @@ class TownCommand(commands.Cog):
 
             residentsString = Utils.CommandTools.list_to_string(list = townsLookup["residents"])
 
-            embed.add_field(name = "Residents", value = residentsString, inline = True)
+            embed.add_field(name = "Residents", value = residentsString[:1024], inline = True)
 
             await inter.send(embed = embed, ephemeral = False)
 
@@ -119,7 +119,7 @@ class TownCommand(commands.Cog):
                 if len(townsLookup["ranks"][rank]) != 0:
                     rankString = Utils.CommandTools.list_to_string(list = townsLookup["ranks"][rank])
 
-                    embed.add_field(name = rank.capitalize(), value = rankString, inline = True)
+                    embed.add_field(name = rank.capitalize(), value = rankString[:1024], inline = True)
 
                 else:
                     embed.add_field(name = rank.capitalize(), value = "N/A", inline = True)
@@ -127,7 +127,7 @@ class TownCommand(commands.Cog):
             if len(townsLookup["trusted"]) != 0:
                 trustedString = Utils.CommandTools.list_to_string(list = townsLookup["trusted"])
 
-                embed.add_field(name = "Trusted", value = trustedString, inline = True)
+                embed.add_field(name = "Trusted", value = trustedString[:1024], inline = True)
 
             else:
                 embed.add_field(name = "Trusted", value = "N/A", inline = True)
@@ -161,7 +161,7 @@ class TownCommand(commands.Cog):
             if len(townsLookup["outlaws"]) != 0:
                 outlawsString = Utils.CommandTools.list_to_string(list = townsLookup["outlaws"])
 
-                embed.add_field(name = "Outlaws", value = outlawsString, inline = True)
+                embed.add_field(name = "Outlaws", value = outlawsString[:1024], inline = True)
 
             else:
                 embed.add_field(name = "Outlaws", value = f"{townsLookup['strings']['town']} has no outlaws :)", inline = True)

@@ -74,7 +74,7 @@ class NationCommand(commands.Cog):
 
             residentsString = Utils.CommandTools.list_to_string(list = nationsLookup["residents"])
 
-            embed.add_field(name = "Residents", value = residentsString, inline = True)
+            embed.add_field(name = "Residents", value = residentsString[:1024], inline = True)
 
             await inter.send(embed = embed, ephemeral = False)
 
@@ -106,7 +106,7 @@ class NationCommand(commands.Cog):
                 if len(nationsLookup["ranks"][rank]) != 0:
                     rankString = Utils.CommandTools.list_to_string(list = nationsLookup["ranks"][rank])
 
-                    embed.add_field(name = rank.capitalize(), value = rankString, inline = True)
+                    embed.add_field(name = rank.capitalize(), value = rankString[:1024], inline = True)
 
                 else:
                     embed.add_field(name = rank.capitalize(), value = "N/A", inline = True)
@@ -140,7 +140,7 @@ class NationCommand(commands.Cog):
             if len(nationsLookup["allies"]) != 0:
                 alliesString = Utils.CommandTools.list_to_string(list = nationsLookup["allies"])
 
-                embed.add_field(name = "Allies", value = alliesString, inline = True)
+                embed.add_field(name = "Allies", value = alliesString[:1024], inline = True)
 
             else:
                 embed.add_field(name = "Allies", value = f"{nationsLookup['strings']['nation']} has no allies :(", inline = True)
@@ -174,7 +174,7 @@ class NationCommand(commands.Cog):
             if len(nationsLookup["enemies"]) != 0:
                 enemiesString = Utils.CommandTools.list_to_string(list = nationsLookup["enemies"])
 
-                embed.add_field(name = "Enemies", value = enemiesString, inline = True)
+                embed.add_field(name = "Enemies", value = enemiesString[:1024], inline = True)
 
             else:
                 embed.add_field(name = "Enemies", value = f"{nationsLookup['strings']['nation']} has no enemies :)", inline = True)
@@ -207,7 +207,7 @@ class NationCommand(commands.Cog):
 
             townsString = Utils.CommandTools.list_to_string(list = nationsLookup["towns"])
 
-            embed.add_field(name = "Towns", value = townsString, inline = True)
+            embed.add_field(name = "Towns", value = townsString[:1024], inline = True)
 
             await inter.send(embed = embed, ephemeral = False)
 
@@ -244,7 +244,7 @@ class NationCommand(commands.Cog):
             if len(unalliedList) != 0:
                 unalliedString = Utils.CommandTools.list_to_string(list = unalliedList)
 
-                embed.add_field(name = "Unallied", value = unalliedString, inline = True)
+                embed.add_field(name = "Unallied", value = unalliedString[:1024], inline = True)
 
             else:
                 embed.add_field(name = "Unallied", value = f"{nationsLookup['strings']['nation']} has allied everyone :)", inline = True)

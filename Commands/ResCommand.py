@@ -106,7 +106,7 @@ class ResCommand(commands.Cog):
             if len(residentsLookup["friends"]) != 0:
                 friendsString = Utils.CommandTools.list_to_string(list = residentsLookup["friends"])
 
-                embed.add_field(name = "Friends", value = friendsString, inline = True)
+                embed.add_field(name = "Friends", value = friendsString[:1024], inline = True)
 
             else:
                 embed.add_field(name = "Friends", value = f"{residentsLookup['strings']['username']} has no friends :(", inline = True)
