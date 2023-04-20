@@ -1,3 +1,4 @@
+import random
 import disnake
 from disnake.ext import commands
 import Utils.Utils as Utils
@@ -17,11 +18,14 @@ class TownCommand(commands.Cog):
     async def search(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        town: str = commands.Param(description = "Town's name"),
+        town: str = commands.Param(description = "Town's name, leave blank for a random choice", default = ""),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/town search town: {town} server: {server}"
         try:
+            if town == "":
+                allTownsLookup = Utils.Lookup.lookup(server, endpoint = "towns") 
+                town = random.choice(allTownsLookup["allTowns"])
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)

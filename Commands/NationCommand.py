@@ -1,3 +1,4 @@
+import random
 import disnake
 from disnake.ext import commands
 import Utils.Utils as Utils
@@ -17,11 +18,14 @@ class NationCommand(commands.Cog):
     async def search(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        nation: str = commands.Param(description = "Nation's name"),
+        nation: str = commands.Param(description = "Nation's name, leave blan for a random choice", default = ""),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation search nation: {nation} server: {server}"
         try:
+            if nation == "":
+                allNationsLookup = Utils.Lookup.lookup(server, endpoint = "nations")
+                nation = random.choice(allNationsLookup["allNations"])
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
