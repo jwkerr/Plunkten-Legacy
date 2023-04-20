@@ -57,7 +57,7 @@ class ResCommand(commands.Cog):
 
             embed.add_field(name = "Affiliation", value = f"• `Town` — {town}\n• `Nation` — {nation}", inline = True)
             embed.add_field(name = "Online", value = residentsLookup["status"]["isOnline"], inline = True)
-            embed.add_field(name = "Balance", value = residentsLookup["stats"]["balance"], inline = True)
+            embed.add_field(name = "Balance", value = f"{residentsLookup['stats']['balance']}G", inline = True)
 
             embed.add_field(name = "Registered", value = f"<t:{round(residentsLookup['timestamps']['registered'] / 1000)}:R>", inline = True)
             embed.add_field(name = "Last Online", value = f"<t:{round(residentsLookup['timestamps']['lastOnline'] / 1000)}:R>", inline = True)

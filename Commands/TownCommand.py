@@ -49,7 +49,7 @@ class TownCommand(commands.Cog):
 
             embed.add_field(name = "Residents", value = townsLookup["stats"]["numResidents"], inline = True)
             embed.add_field(name = "Town Blocks", value = f"{townsLookup['stats']['numTownBlocks']}/{townsLookup['stats']['maxTownBlocks']}", inline = True)
-            embed.add_field(name = "Balance", value = townsLookup["stats"]["balance"], inline = True)
+            embed.add_field(name = "Balance", value = f"{townsLookup['stats']['balance']}G", inline = True)
 
             embed.add_field(name = "Founder", value = townsLookup["strings"]["founder"], inline = True)
             embed.add_field(name = "Founded", value = f"<t:{round(townsLookup['timestamps']['registered'] / 1000)}:R>", inline = True)            
