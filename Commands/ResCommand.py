@@ -44,6 +44,11 @@ class ResCommand(commands.Cog):
                 else:
                     fullName += fullNameList[i] + " "
 
+            if residentsLookup["timestamps"]["lastOnline"] != 0:
+                lastOnline = f"<t:{round(residentsLookup['timestamps']['lastOnline'] / 1000)}:R>"
+            else:
+                lastOnline = "NPC"
+
             try:
                 town = residentsLookup["affiliation"]["town"]
                 joinedTownAt = f"<t:{round(residentsLookup['timestamps']['joinedTownAt'] / 1000)}:R>"
@@ -65,7 +70,7 @@ class ResCommand(commands.Cog):
             embed.add_field(name = "Balance", value = f"{residentsLookup['stats']['balance']}G", inline = True)
 
             embed.add_field(name = "Registered", value = f"<t:{round(residentsLookup['timestamps']['registered'] / 1000)}:R>", inline = True)
-            embed.add_field(name = "Last Online", value = f"<t:{round(residentsLookup['timestamps']['lastOnline'] / 1000)}:R>", inline = True)
+            embed.add_field(name = "Last Online", value = lastOnline, inline = True)
             embed.add_field(name = "Joined Town", value = joinedTownAt, inline = True)
 
             embed.add_field(name = "Perms", value = f"• `Build` — {rnaoPermsList[0]}\n• `Destroy` — {rnaoPermsList[1]}\n• `Switch` — {rnaoPermsList[2]}\n• `ItemUse` — {rnaoPermsList[3]}", inline = True)
