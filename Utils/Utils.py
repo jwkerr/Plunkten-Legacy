@@ -89,7 +89,7 @@ class Embeds():
 
         if author != None:
             embed.set_author(
-                name = author,
+                name = f"Queried by {author}",
                 icon_url = author.avatar
             )
 
@@ -107,7 +107,8 @@ class Embeds():
 
         if thumbnail != None:
             embed.set_thumbnail(url = thumbnail)
-        embed.set_image(url = "https://cdn.discordapp.com/attachments/1050945545037951048/1097092804007694447/linebreak.png")
+            
+        embed.set_image(url = "https://cdn.discordapp.com/attachments/1050945545037951048/1099030835220467872/linebreak.png")
 
         return embed
     
