@@ -18,7 +18,7 @@ class NationCommand(commands.Cog):
     async def search(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        nation: str = commands.Param(description = "Nation's name, leave blan for a random choice", default = ""),
+        nation: str = commands.Param(description = "Nation's name, leave blank for a random choice", default = ""),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation search nation: {nation} server: {server}"
