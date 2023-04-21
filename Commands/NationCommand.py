@@ -43,10 +43,10 @@ class NationCommand(commands.Cog):
             embed.add_field(name = "Location", value = f"[Open Dynmap]({locationUrl})", inline = True)   
 
             embed.add_field(name = "Residents", value = nationsLookup["stats"]["numResidents"], inline = True)
-            embed.add_field(name = "Town Blocks", value = nationsLookup["stats"]["numTownBlocks"], inline = True)
-            embed.add_field(name = "Balance", value = f"{nationsLookup['stats']['balance']}G", inline = True)
-
             embed.add_field(name = "Towns", value = nationsLookup["stats"]["numTowns"], inline = True)
+            embed.add_field(name = "Town Blocks", value = nationsLookup["stats"]["numTownBlocks"], inline = True)
+
+            embed.add_field(name = "Balance", value = f"{nationsLookup['stats']['balance']}G", inline = True)
             embed.add_field(name = "Founded", value = f"<t:{round(nationsLookup['timestamps']['registered'] / 1000)}:R>", inline = True)                  
             embed.add_field(name = "Status", value = f"• `Open` — {nationsLookup['status']['isOpen']}\n• `Public` — {nationsLookup['status']['isPublic']}\n• `Neutral` — {nationsLookup['status']['isNeutral']}", inline = True)
 
