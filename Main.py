@@ -6,7 +6,7 @@ import logging
 
 logger = logging.getLogger("disnake")
 logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler(filename = "disnake.log", encoding = "utf-8", mode = "w")
+handler = logging.FileHandler(filename = "disnake.log", encoding = "utf-8", mode = "a")
 handler.setFormatter(logging.Formatter("%(asctime)s:%(levelname)s:%(name)s: %(message)s"))
 logger.addHandler(handler)
 
