@@ -1,3 +1,4 @@
+import random
 import disnake
 from disnake.ext import commands
 import Utils.Utils as Utils
@@ -17,11 +18,14 @@ class ResCommand(commands.Cog):
     async def search(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        username: str = commands.Param(description = "Resident's username"),
+        username: str = commands.Param(description = "Resident's username, leave blank for a random choice", default = ""),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/res search username: {username} server: {server}"
         try:
+            if username == "":
+                allResidentsLookup = Utils.Lookup.lookup(server, endpoint = "residents")
+                username = random.choice(allResidentsLookup["allResidents"])
             residentsLookup = Utils.Lookup.lookup(server, endpoint = "residents", name = username)
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
@@ -31,6 +35,7 @@ class ResCommand(commands.Cog):
 
         try:
             fullNameList = [residentsLookup["strings"]["title"], residentsLookup["strings"]["username"], residentsLookup["strings"]["surname"]]
+            fullNameList = [x for x in fullNameList if x != ""]
 
             fullName = ""
             for i in range(len(fullNameList)):

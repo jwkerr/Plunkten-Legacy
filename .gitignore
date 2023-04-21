@@ -1,3 +1,4 @@
 /secrets.env
-/__pycache__
+/Commands/__pycache__
+/Utils/__pycache__
 /disnake.log
