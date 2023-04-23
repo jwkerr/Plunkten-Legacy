@@ -68,11 +68,11 @@ class CommandTools():
 class Lookup():
     def lookup(server, endpoint = None, name = None):
         if endpoint == None:
-            api_url = f"http://localhost:8080/{server}/"
+            api_url = f"https://api.earthmc.net/v1/{server}/"
         elif name == None:
-            api_url = f"http://localhost:8080/{server}/{endpoint}"
+            api_url = f"https://api.earthmc.net/v1/{server}/{endpoint}"
         else:
-            api_url = f"http://localhost:8080/{server}/{endpoint}/{name}"
+            api_url = f"https://api.earthmc.net/v1/{server}/{endpoint}/{name}"
 
         lookup = requests.get(api_url).json()
 
