@@ -23,7 +23,7 @@ class NationCommand(commands.Cog):
     ):
         commandString = f"/nation search nation: {nation} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             if nation == "":
                 allNationsLookup = Utils.Lookup.lookup(server, endpoint = "nations")
@@ -68,7 +68,7 @@ class NationCommand(commands.Cog):
     ):
         commandString = f"/nation reslist nation: {nation} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
@@ -100,7 +100,7 @@ class NationCommand(commands.Cog):
     ):
         commandString = f"/nation ranklist nation: {nation} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
@@ -137,7 +137,7 @@ class NationCommand(commands.Cog):
     ):
         commandString = f"/nation allylist nation: {nation} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
@@ -173,7 +173,7 @@ class NationCommand(commands.Cog):
     ):
         commandString = f"/nation enemylist nation: {nation} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
@@ -209,7 +209,7 @@ class NationCommand(commands.Cog):
     ):
         commandString = f"/nation townlist nation: {nation} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
@@ -241,7 +241,7 @@ class NationCommand(commands.Cog):
     ):
         commandString = f"/nation unallied nation: {nation} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
             allNationsLookup = Utils.Lookup.lookup(server, endpoint = "nations")

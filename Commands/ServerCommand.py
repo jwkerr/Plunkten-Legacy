@@ -14,7 +14,7 @@ class ServerCommand(commands.Cog):
     ):
         commandString = f"/server server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             serverLookup = Utils.Lookup.lookup(server)
             allResidentsLookup = Utils.Lookup.lookup(server, endpoint = "residents")

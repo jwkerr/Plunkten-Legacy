@@ -23,7 +23,7 @@ class TownCommand(commands.Cog):
     ):
         commandString = f"/town search town: {town} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             if town == "":
                 allTownsLookup = Utils.Lookup.lookup(server, endpoint = "towns") 
@@ -81,7 +81,7 @@ class TownCommand(commands.Cog):
     ):
         commandString = f"/town reslist town: {town} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
         except:
@@ -113,7 +113,7 @@ class TownCommand(commands.Cog):
     ):
         commandString = f"/town ranklist town: {town} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
         except:
@@ -158,7 +158,7 @@ class TownCommand(commands.Cog):
     ):
         commandString = f"/town outlawlist town: {town} server: {server}"
         print(f"{inter.author.name}: {commandString}")
-        inter.response.defer()
+        await inter.response.defer()
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
         except:
