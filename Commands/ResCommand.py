@@ -23,6 +23,7 @@ class ResCommand(commands.Cog):
     ):
         commandString = f"/res search username: {username} server: {server}"
         print(f"{inter.author.name}: {commandString}")
+        inter.response.defer()
         try:
             if username == "":
                 allResidentsLookup = Utils.Lookup.lookup(server, endpoint = "residents")
@@ -104,6 +105,7 @@ class ResCommand(commands.Cog):
     ):
         commandString = f"/res friendlist username: {username} server: {server}"
         print(f"{inter.author.name}: {commandString}")
+        inter.response.defer()
         try:
             residentsLookup = Utils.Lookup.lookup(server.lower(), endpoint = "residents", name = username)
         except:
