@@ -22,6 +22,7 @@ class TownCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/town search town: {town} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             if town == "":
                 allTownsLookup = Utils.Lookup.lookup(server, endpoint = "towns") 
@@ -78,6 +79,7 @@ class TownCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/town reslist town: {town} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
         except:
@@ -108,6 +110,7 @@ class TownCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/town ranklist town: {town} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
         except:
@@ -151,6 +154,7 @@ class TownCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/town outlawlist town: {town} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
         except:

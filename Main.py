@@ -18,7 +18,7 @@ async def on_ready():
     print(f"Logged in as {bot.user}")
     print(f"Operating in {len(bot.guilds)} guild/s")
     for guild in bot.guilds:
-        print(f"{guild.name} : {guild.member_count}")
+        print(f"{guild.name}: {guild.member_count}")
 
 bot.load_extension("Commands.ServerCommand")
 bot.load_extension("Commands.ResCommand")

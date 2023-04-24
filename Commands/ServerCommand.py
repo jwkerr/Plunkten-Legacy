@@ -13,6 +13,7 @@ class ServerCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/server server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             serverLookup = Utils.Lookup.lookup(server)
             allResidentsLookup = Utils.Lookup.lookup(server, endpoint = "residents")

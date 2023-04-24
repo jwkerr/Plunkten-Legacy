@@ -22,6 +22,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation search nation: {nation} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             if nation == "":
                 allNationsLookup = Utils.Lookup.lookup(server, endpoint = "nations")
@@ -65,6 +66,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation reslist nation: {nation} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
@@ -95,6 +97,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation ranklist nation: {nation} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
@@ -130,6 +133,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation allylist nation: {nation} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
@@ -164,6 +168,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation enemylist nation: {nation} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
@@ -198,6 +203,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation townlist nation: {nation} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
         except:
@@ -228,6 +234,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation unallied nation: {nation} server: {server}"
+        print(f"{inter.author.name}: {commandString}")
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
             allNationsLookup = Utils.Lookup.lookup(server, endpoint = "nations")
