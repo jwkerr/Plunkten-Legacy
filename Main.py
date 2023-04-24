@@ -16,6 +16,9 @@ bot = commands.InteractionBot()
 async def on_ready():
     await bot.change_presence(activity = disnake.Game(name = "EarthMC.net"))
     print(f"Logged in as {bot.user}")
+    print(f"Operating in {len(bot.guilds)} guild/s")
+    for guild in bot.guilds:
+        print(f"{guild.name} : {guild.member_count}")
 
 bot.load_extension("Commands.ServerCommand")
 bot.load_extension("Commands.ResCommand")
