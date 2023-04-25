@@ -22,7 +22,7 @@ class ResCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/res search username: {username} server: {server}"
-        print(f"{inter.author.name}: {commandString}")
+        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             if username == "":
@@ -104,7 +104,7 @@ class ResCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/res friendlist username: {username} server: {server}"
-        print(f"{inter.author.name}: {commandString}")
+        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             residentsLookup = Utils.Lookup.lookup(server.lower(), endpoint = "residents", name = username)

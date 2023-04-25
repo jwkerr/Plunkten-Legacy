@@ -22,7 +22,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation search nation: {nation} server: {server}"
-        print(f"{inter.author.name}: {commandString}")
+        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             if nation == "":
@@ -67,7 +67,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation reslist nation: {nation} server: {server}"
-        print(f"{inter.author.name}: {commandString}")
+        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
@@ -99,7 +99,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation ranklist nation: {nation} server: {server}"
-        print(f"{inter.author.name}: {commandString}")
+        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
@@ -136,7 +136,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation allylist nation: {nation} server: {server}"
-        print(f"{inter.author.name}: {commandString}")
+        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
@@ -172,7 +172,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation enemylist nation: {nation} server: {server}"
-        print(f"{inter.author.name}: {commandString}")
+        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
@@ -208,7 +208,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation townlist nation: {nation} server: {server}"
-        print(f"{inter.author.name}: {commandString}")
+        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
@@ -240,7 +240,7 @@ class NationCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
     ):
         commandString = f"/nation unallied nation: {nation} server: {server}"
-        print(f"{inter.author.name}: {commandString}")
+        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
