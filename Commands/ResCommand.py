@@ -18,7 +18,7 @@ class ResCommand(commands.Cog):
     async def search(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        username: str = commands.Param(description = "Resident's username, type 'random' for a random choice", default = ""),
+        username: str = commands.Param(description = "Resident's username, type 'random' for a random choice"),
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/res search username: {username} server: {server}"
@@ -110,7 +110,7 @@ class ResCommand(commands.Cog):
         await inter.response.defer()
         try:
             residentsLookup = Utils.Lookup.lookup(server.lower(), endpoint = "residents", name = username)
-            
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
