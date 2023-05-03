@@ -18,17 +18,18 @@ class ResCommand(commands.Cog):
     async def search(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        username: str = commands.Param(description = "Resident's username, leave blank for a random choice", default = ""),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        username: str = commands.Param(description = "Resident's username, type 'random' for a random choice", default = ""),
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/res search username: {username} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
-            if username == "":
+            if username == "random":
                 allResidentsLookup = Utils.Lookup.lookup(server, endpoint = "residents")
                 username = random.choice(allResidentsLookup["allResidents"])
             residentsLookup = Utils.Lookup.lookup(server, endpoint = "residents", name = username)
+            
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -58,6 +59,7 @@ class ResCommand(commands.Cog):
                     nation = residentsLookup["affiliation"]["nation"]
                 except:
                     nation = None
+
             except:
                 town = None
                 joinedTownAt = "N/A"
@@ -101,13 +103,14 @@ class ResCommand(commands.Cog):
         self,
         inter: disnake.ApplicationCommandInteraction,
         username: str = commands.Param(description = "Resident's username"),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/res friendlist username: {username} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             residentsLookup = Utils.Lookup.lookup(server.lower(), endpoint = "residents", name = username)
+            
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 

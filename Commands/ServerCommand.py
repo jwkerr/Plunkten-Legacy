@@ -10,7 +10,7 @@ class ServerCommand(commands.Cog):
     async def server(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/server server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
@@ -20,6 +20,7 @@ class ServerCommand(commands.Cog):
             allResidentsLookup = Utils.Lookup.lookup(server, endpoint = "residents")
             allTownsLookup = Utils.Lookup.lookup(server, endpoint = "towns")
             allNationsLookup = Utils.Lookup.lookup(server, endpoint = "nations")
+            
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 

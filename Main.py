@@ -3,6 +3,7 @@ from disnake.ext import commands
 import os
 import dotenv
 import logging
+import Utils.Utils as Utils
 
 logger = logging.getLogger("disnake")
 logger.setLevel(logging.DEBUG)
@@ -15,10 +16,13 @@ bot = commands.InteractionBot()
 @bot.event
 async def on_ready():
     await bot.change_presence(activity = disnake.Game(name = "EarthMC.net"))
+    guildsList = []
+    for guild in bot.guilds:
+        guildsList.append(guild.name)
+    guildsString = Utils.CommandTools.list_to_string(list = guildsList)
+    print(guildsString)
     print(f"Logged in as {bot.user}")
     print(f"Operating in {len(bot.guilds)} guild/s")
-    for guild in bot.guilds:
-        print(f"{guild.name}: {guild.member_count}")
 
 bot.load_extension("Commands.ServerCommand")
 bot.load_extension("Commands.ResCommand")

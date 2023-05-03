@@ -18,17 +18,18 @@ class NationCommand(commands.Cog):
     async def search(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        nation: str = commands.Param(description = "Nation's name, leave blank for a random choice", default = ""),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        nation: str = commands.Param(description = "Nation's name, type 'random' for a random choice"),
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/nation search nation: {nation} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
-            if nation == "":
+            if nation == "random":
                 allNationsLookup = Utils.Lookup.lookup(server, endpoint = "nations")
                 nation = random.choice(allNationsLookup["allNations"])
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -42,11 +43,11 @@ class NationCommand(commands.Cog):
 
             embed.add_field(name = "King", value = nationsLookup["strings"]["king"], inline = True)
             embed.add_field(name = "Capital", value = nationsLookup["strings"]["capital"], inline = True)
-            embed.add_field(name = "Location", value = f"[Open Dynmap]({locationUrl})", inline = True)   
+            embed.add_field(name = "Location", value = f"[{int(round(nationsLookup['spawn']['x'], 0))}, {int(round(nationsLookup['spawn']['z'], 0))}]({locationUrl})", inline = True)   
 
             embed.add_field(name = "Residents", value = nationsLookup["stats"]["numResidents"], inline = True)
             embed.add_field(name = "Towns", value = nationsLookup["stats"]["numTowns"], inline = True)
-            embed.add_field(name = "Town Blocks", value = nationsLookup["stats"]["numTownBlocks"], inline = True)
+            embed.add_field(name = "Town Blocks", value = f"{nationsLookup['stats']['numTownBlocks']} ({nationsLookup['stats']['numTownBlocks'] * 16 + (48 * nationsLookup['stats']['numTowns'])}G)", inline = True)
 
             embed.add_field(name = "Balance", value = f"{nationsLookup['stats']['balance']}G", inline = True)
             embed.add_field(name = "Founded", value = f"<t:{round(nationsLookup['timestamps']['registered'] / 1000)}:R>", inline = True)                  
@@ -64,13 +65,14 @@ class NationCommand(commands.Cog):
         self,
         inter: disnake.ApplicationCommandInteraction,
         nation: str = commands.Param(description = "Nation's name"),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/nation reslist nation: {nation} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -96,13 +98,14 @@ class NationCommand(commands.Cog):
         self,
         inter: disnake.ApplicationCommandInteraction,
         nation: str = commands.Param(description = "Nation's name"),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/nation ranklist nation: {nation} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -133,13 +136,14 @@ class NationCommand(commands.Cog):
         self,
         inter: disnake.ApplicationCommandInteraction,
         nation: str = commands.Param(description = "Nation's name"),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/nation allylist nation: {nation} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -169,13 +173,14 @@ class NationCommand(commands.Cog):
         self,
         inter: disnake.ApplicationCommandInteraction,
         nation: str = commands.Param(description = "Nation's name"),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/nation enemylist nation: {nation} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -205,13 +210,14 @@ class NationCommand(commands.Cog):
         self,
         inter: disnake.ApplicationCommandInteraction,
         nation: str = commands.Param(description = "Nation's name"),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/nation townlist nation: {nation} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -237,7 +243,7 @@ class NationCommand(commands.Cog):
         self,
         inter: disnake.ApplicationCommandInteraction,
         nation: str = commands.Param(description = "Nation's name"),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/nation unallied nation: {nation} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
@@ -245,6 +251,7 @@ class NationCommand(commands.Cog):
         try:
             nationsLookup = Utils.Lookup.lookup(server, endpoint = "nations", name = nation)
             allNationsLookup = Utils.Lookup.lookup(server, endpoint = "nations")
+            
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -260,7 +267,12 @@ class NationCommand(commands.Cog):
 
             unalliedList = list(set(allNations).difference(set(allyList)))
             if len(unalliedList) != 0:
-                unalliedString = Utils.CommandTools.list_to_string(list = unalliedList)
+                unalliedString = ""
+                for i in range(len(unalliedList)):
+                    if i == len(unalliedList) - 1:
+                        unalliedString += unalliedList[i]
+                    else:
+                        unalliedString += unalliedList[i] + " "
 
                 embed.add_field(name = "Unallied", value = f"```{unalliedString[:1018]}```", inline = True)
 

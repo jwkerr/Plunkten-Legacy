@@ -18,17 +18,18 @@ class TownCommand(commands.Cog):
     async def search(
         self,
         inter: disnake.ApplicationCommandInteraction,
-        town: str = commands.Param(description = "Town's name, leave blank for a random choice", default = ""),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        town: str = commands.Param(description = "Town's name, type 'random' for a random choice"),
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/town search town: {town} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
-            if town == "":
+            if town == "random":
                 allTownsLookup = Utils.Lookup.lookup(server, endpoint = "towns") 
                 town = random.choice(allTownsLookup["allTowns"])
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -51,10 +52,10 @@ class TownCommand(commands.Cog):
 
             embed.add_field(name = "Mayor", value = townsLookup["strings"]["mayor"], inline = True)
             embed.add_field(name = "Nation", value = nation, inline = True)
-            embed.add_field(name = "Location", value = f"[Open Dynmap]({locationUrl})", inline = True)
+            embed.add_field(name = "Location", value = f"[{int(round(townsLookup['spawn']['x'], 0))}, {int(round(townsLookup['spawn']['z'], 0))}]({locationUrl})", inline = True)
 
             embed.add_field(name = "Residents", value = townsLookup["stats"]["numResidents"], inline = True)
-            embed.add_field(name = "Town Blocks", value = f"{townsLookup['stats']['numTownBlocks']}/{townsLookup['stats']['maxTownBlocks']}", inline = True)
+            embed.add_field(name = "Town Blocks", value = f"{townsLookup['stats']['numTownBlocks']}/{townsLookup['stats']['maxTownBlocks']} ({townsLookup['stats']['numTownBlocks'] * 16 + 48}G)", inline = True)
             embed.add_field(name = "Balance", value = f"{townsLookup['stats']['balance']}G", inline = True)
 
             embed.add_field(name = "Founder", value = townsLookup["strings"]["founder"], inline = True)
@@ -77,13 +78,14 @@ class TownCommand(commands.Cog):
         self,
         inter: disnake.ApplicationCommandInteraction,
         town: str = commands.Param(description = "Town's name"),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/town reslist town: {town} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -109,13 +111,14 @@ class TownCommand(commands.Cog):
         self,
         inter: disnake.ApplicationCommandInteraction,
         town: str = commands.Param(description = "Town's name"),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/town ranklist town: {town} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
@@ -154,13 +157,14 @@ class TownCommand(commands.Cog):
         self,
         inter: disnake.ApplicationCommandInteraction,
         town: str = commands.Param(description = "Town's name"),
-        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora", "nova"])
+        server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/town outlawlist town: {town} server: {server}"
         print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
+
         except:
             embed = Utils.Embeds.error_embed(value = "Check if you wrote a parameter incorrectly or if the server is currently offline", type = "userError", footer = commandString)
 
