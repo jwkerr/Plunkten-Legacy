@@ -37,7 +37,12 @@ class TownCommand(commands.Cog):
             return
         
         try:
-            locationUrl = f"https://earthmc.net/map/{server}/?zoom=4&x={townsLookup['spawn']['x']}&z={townsLookup['spawn']['z']}"
+            try:
+                locationUrl = f"https://earthmc.net/map/{server}/?zoom=4&x={townsLookup['spawn']['x']}&z={townsLookup['spawn']['z']}"
+                location = f"[{int(round(townsLookup['spawn']['x'], 0))}, {int(round(townsLookup['spawn']['z'], 0))}]({locationUrl})"
+            except:
+                locationUrl = f"https://earthmc.net/map/{server}/?zoom=4&x={townsLookup['home']['x'] * 16}&z={townsLookup['home']['z'] * 16}"
+                location = f"[{townsLookup['home']['x'] * 16}, {townsLookup['home']['z'] * 16}]({locationUrl})"
 
             try:
                 nation = townsLookup["affiliation"]["nation"]
@@ -52,7 +57,7 @@ class TownCommand(commands.Cog):
 
             embed.add_field(name = "Mayor", value = townsLookup["strings"]["mayor"], inline = True)
             embed.add_field(name = "Nation", value = nation, inline = True)
-            embed.add_field(name = "Location", value = f"[{int(round(townsLookup['spawn']['x'], 0))}, {int(round(townsLookup['spawn']['z'], 0))}]({locationUrl})", inline = True)
+            embed.add_field(name = "Location", value = location, inline = True)
 
             embed.add_field(name = "Residents", value = townsLookup["stats"]["numResidents"], inline = True)
             embed.add_field(name = "Town Blocks", value = f"{townsLookup['stats']['numTownBlocks']}/{townsLookup['stats']['maxTownBlocks']} ({townsLookup['stats']['numTownBlocks'] * 16 + 48}G)", inline = True)
