@@ -22,7 +22,6 @@ class ResCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/res search username: {username} server: {server}"
-        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             if username == "random":
@@ -106,7 +105,6 @@ class ResCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/res friendlist username: {username} server: {server}"
-        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             residentsLookup = Utils.Lookup.lookup(server.lower(), endpoint = "residents", name = username)

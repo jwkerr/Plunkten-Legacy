@@ -22,7 +22,6 @@ class TownCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/town search town: {town} server: {server}"
-        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             if town == "random":
@@ -86,7 +85,6 @@ class TownCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/town reslist town: {town} server: {server}"
-        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
@@ -119,7 +117,6 @@ class TownCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/town ranklist town: {town} server: {server}"
-        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
@@ -165,7 +162,6 @@ class TownCommand(commands.Cog):
         server: str = commands.Param(description = "Server name, defaults to Aurora", default = "aurora", choices = ["aurora"])
     ):
         commandString = f"/town outlawlist town: {town} server: {server}"
-        print(f"{inter.author.name}#{inter.author.discriminator} in {inter.guild.name}: {commandString}")
         await inter.response.defer()
         try:
             townsLookup = Utils.Lookup.lookup(server, endpoint = "towns", name = town)
