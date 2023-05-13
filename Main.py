@@ -9,11 +9,6 @@ bot = commands.InteractionBot()
 @bot.event
 async def on_ready():
     await bot.change_presence(activity = disnake.Game(name = "EarthMC.net"))
-    guildsList = []
-    for guild in bot.guilds:
-        guildsList.append(guild.name)
-    guildsString = Utils.CommandTools.list_to_string(list = guildsList)
-    print(guildsString)
     print(f"Logged in as {bot.user}")
     print(f"Operating in {len(bot.guilds)} guild/s")
 
