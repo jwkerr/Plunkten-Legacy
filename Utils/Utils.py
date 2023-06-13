@@ -95,7 +95,7 @@ class Embeds():
 
         if footer != None:
             embed.set_footer(
-                icon_url = "https://cdn.discordapp.com/attachments/1050945545037951048/1097958906233360475/plunktencommand.png",
+                icon_url = "https://cdn.discordapp.com/attachments/1050945545037951048/1118013041989124096/plunktencommand.png",
                 text = footer
             )
 
