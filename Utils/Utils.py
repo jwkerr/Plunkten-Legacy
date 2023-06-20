@@ -89,7 +89,7 @@ class Embeds():
 
         if author != None:
             embed.set_author(
-                name = f"Queried by {author}",
+                name = f"Queried by {author.name}",
                 icon_url = author.avatar
             )
 
