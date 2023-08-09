@@ -1,6 +1,8 @@
 import datetime
 import disnake
+import random 
 import requests
+import string
 import traceback
 
 class CommandTools():
@@ -64,18 +66,17 @@ class CommandTools():
                 listString += list[i] + ", "
 
         return listString
-    
 class Lookup():
     def lookup(server, endpoint = None, name = None):
+        # Append a random query to the URL, which allows the most recent data to be retrieved, rather than the Cloudflare cached data
+        rand_query = '?' + ''.join(random.choices(string.ascii_letters + string.digits, k=8))
         if endpoint == None:
-            api_url = f"https://api.earthmc.net/v1/{server}/"
+            api_url = f"https://api.earthmc.net/v1/{server}/{rand_query}"
         elif name == None:
-            api_url = f"https://api.earthmc.net/v1/{server}/{endpoint}"
+            api_url = f"https://api.earthmc.net/v1/{server}/{endpoint}/{rand_query}"
         else:
-            api_url = f"https://api.earthmc.net/v1/{server}/{endpoint}/{name}"
-
+            api_url = f"https://api.earthmc.net/v1/{server}/{endpoint}/{name}/{rand_query}"
         lookup = requests.get(api_url).json()
-
         return lookup
     
 class Embeds():
